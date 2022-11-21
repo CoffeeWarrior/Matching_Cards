@@ -33,7 +33,7 @@ export const Card: React.FC<CardProps> = ({
             : "reverseAnimation"
         }`}
       >
-        {cardValue}
+        <h2>{cardValue}</h2>
       </div>
     </div>
   );
