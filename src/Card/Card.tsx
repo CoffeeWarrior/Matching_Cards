@@ -1,4 +1,5 @@
 import { cardVisualStates } from "../cardVisiualStates";
+import "./Card.css";
 
 export type CardProps = CardState & {
   callback: Function;
@@ -17,17 +18,23 @@ export const Card: React.FC<CardProps> = ({
   cardPosition,
 }) => {
   return (
-    <div
-      onClick={() => callback(cardPosition)}
-      style={{ border: "1px solid black" }}
-    >
-      <b>Card Position:</b> {cardPosition + " "}
-      <b>Card Value:</b> {cardValue + " "} <br />
-      {cardVisualState === cardVisualStates.unflipped
-        ? "unflipped"
-        : cardVisualState === cardVisualStates.flipped
-        ? "flipped"
-        : "found"}
+    <div className="container" onClick={() => callback(cardPosition)}>
+      <div
+        className={`back ${
+          cardVisualState === cardVisualStates.unflipped
+            ? "animation"
+            : "reverseAnimation"
+        }`}
+      ></div>
+      <div
+        className={`front ${
+          cardVisualState === cardVisualStates.unflipped
+            ? "animation"
+            : "reverseAnimation"
+        }`}
+      >
+        {cardValue}
+      </div>
     </div>
   );
 };
