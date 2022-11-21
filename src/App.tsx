@@ -3,6 +3,7 @@ import { Card, CardState } from "./Card/Card";
 import { cardVisualStates } from "./cardVisiualStates";
 
 function App() {
+  const [thinking, setThinking] = useState<boolean>(false);
   const [cards, setCards] = useState<CardState[]>(
     new Array(8).fill(0).map((val: any, i: number) => {
       return {
@@ -12,12 +13,29 @@ function App() {
     })
   );
 
-  useEffect(() => {
-    //randomize card order, export to function
+  const shuffleCards = () => {
     const currCards = [...cards];
     cards.sort((a, b) => Math.ceil(Math.random() * -2));
     setCards(currCards);
+  };
+
+  useEffect(() => {
+    //randomize card order, export to function
+    shuffleCards();
   }, []);
+
+  useEffect(() => {
+    let allCardsFound = true;
+    cards.map((card: CardState) => {
+      allCardsFound =
+        card.cardVisualState === cardVisualStates.found && allCardsFound;
+    });
+
+    if (allCardsFound) {
+      alert("congrats, you found all the cards, hit ok to play again!");
+      window.location.reload();
+    }
+  }, [cards]);
 
   useEffect(() => {
     const flippedCards = cards.filter(
@@ -44,21 +62,30 @@ function App() {
           return card;
         });
       }
-      setCards(result);
+      setTimeout(() => {
+        setCards(result);
+      }, 2000);
     }
   }, [cards]);
 
   const updateCards = (cardPosition: number) => {
-    if (cards[cardPosition].cardVisualState === cardVisualStates.found) {
-      return;
+    if (!thinking) {
+      if (cards[cardPosition].cardVisualState === cardVisualStates.found) {
+        return;
+      }
+      const currCards = [...cards];
+      currCards[cardPosition].cardVisualState = cardVisualStates.flipped;
+      setThinking(true);
+      setCards(currCards);
+      setTimeout(() => setThinking(false), 2000);
     }
-    const currCards = [...cards];
-    currCards[cardPosition].cardVisualState = cardVisualStates.flipped;
-    setCards(currCards);
   };
 
   return (
-    <div className="App">
+    <div
+      className="App"
+      style={{ display: "flex", gap: "10px", width: "100%", height: "20vh" }}
+    >
       {cards.map((cardState: CardState, i: number) => {
         return (
           <Card
