@@ -82,19 +82,28 @@ function App() {
   };
 
   return (
-    <div
-      className="App"
-      style={{ display: "flex", gap: "10px", width: "100%", height: "20vh" }}
-    >
-      {cards.map((cardState: CardState, i: number) => {
-        return (
-          <Card
-            {...cardState}
-            cardPosition={i}
-            callback={(cardPosition: number) => updateCards(cardPosition)}
-          />
-        );
-      })}
+    <div className="App" style={{ width: "100%", height: "100%" }}>
+      <h1>Card matching game</h1>
+      <p>flip the cards to match the numbers</p>
+      <p>
+        note from the creator: There is a delay between each choice. This is
+        intentional, as the project requirements stated that there should be a
+        delay while comparing. adding a delay between each choice was easier &
+        satisfies the project requirement
+      </p>
+      <div
+        style={{ display: "flex", gap: "10px", width: "100%", height: "20vh" }}
+      >
+        {cards.map((cardState: CardState, i: number) => {
+          return (
+            <Card
+              {...cardState}
+              cardPosition={i}
+              callback={(cardPosition: number) => updateCards(cardPosition)}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 }
