@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Matching_Cards/static/css/main.1db644d3.css",
+    "main.js": "/Matching_Cards/static/js/main.2ca78228.js",
+    "static/js/787.2cafd570.chunk.js": "/Matching_Cards/static/js/787.2cafd570.chunk.js",
+    "index.html": "/Matching_Cards/index.html",
+    "main.1db644d3.css.map": "/Matching_Cards/static/css/main.1db644d3.css.map",
+    "main.2ca78228.js.map": "/Matching_Cards/static/js/main.2ca78228.js.map",
+    "787.2cafd570.chunk.js.map": "/Matching_Cards/static/js/787.2cafd570.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1db644d3.css",
+    "static/js/main.2ca78228.js"
+  ]
+}
